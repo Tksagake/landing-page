@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom'
 // Lazy load components for better performance
 const Landing = lazy(() => import('@/app/landing/page'))
 const Dashboard = lazy(() => import('@/app/dashboard/page'))
+const StudentPortal = lazy(() => import('@/app/student/page'))
 const Dashboard2 = lazy(() => import('@/app/dashboard-2/page'))
 const Mail = lazy(() => import('@/app/mail/page'))
 const Tasks = lazy(() => import('@/app/tasks/page'))
@@ -58,6 +59,9 @@ export const routes: RouteConfig[] = [
     path: "/landing",
     element: <Landing />
   },
+
+  // Vivace student portal reference
+  { path: "/student/*", element: <StudentPortal /> },
 
   // Dashboard Routes
   {
