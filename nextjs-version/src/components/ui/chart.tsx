@@ -123,6 +123,15 @@ function ChartTooltipContent({
     indicator?: "line" | "dot" | "dashed"
     nameKey?: string
     labelKey?: string
+    // Recharts 3 omits the runtime tooltip payload from its public component props.
+    payload?: Array<{
+      dataKey?: string | number
+      name?: string | number
+      value?: string | number
+      color?: string
+      payload?: Record<string, any>
+      [key: string]: any
+    }>
   }) {
   const { config } = useChart()
 
