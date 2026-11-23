@@ -273,7 +273,7 @@ const ChartLegend = RechartsPrimitive.Legend
 
 type ChartLegendPayload = {
   dataKey?: string | number
-  value?: React.ReactNode
+  value?: string | number
   color?: string
 }
 
