@@ -237,6 +237,6 @@ export default function StudentPortal() {
   else if(page==="classes") content=<ClassPage classId={parts[2]||"class-01"}/>;
   else if(page==="ideapad") content=<IdeaPadPage/>;
   else content=<GenericPage page={page}/>;
-  const activePath=page==="units"||page==="classes"||page==="assignments"||page==="ideapad"?"courses":`/student/${page}`;
+  const activePath=page==="units"||page==="classes"||page==="assignments"||page==="ideapad"?"/student/courses":`/student/${page}`;
   return <StudentShell activePath={activePath}>{content}</StudentShell>;
 }
