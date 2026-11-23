@@ -16,6 +16,7 @@ const navItems: NavItem[] = [
   { label: "My coursework", path: "/student/courses", icon: BookOpen },
   { label: "Course enrollment", path: "/student/course-enrollment", icon: Plus },
   { label: "Assessments", path: "/student/assessments", icon: FileCheck2 },
+  { label: "Exam portal", path: "https://mitihani.vivaceke.co.ke/", icon: GraduationCap, external: true },
   { label: "Grades & progress", path: "/student/grades", icon: Award },
   { label: "Finance", path: "/student/payments", icon: Wallet },
   { label: "Learning library", path: "/student/resources", icon: Library },
@@ -68,12 +69,13 @@ function PanelTitle({ title, detail, action }: { title: string; detail?: string;
 }
 function StudentShell({ children, activePath }: { children: React.ReactNode; activePath: string }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
   const isActive = (path: string) => activePath === path || (path === "/student/courses" && activePath.startsWith("/student/units")) || (path === "/student/courses" && activePath.startsWith("/student/classes")) || (path === "/student/courses" && activePath.startsWith("/student/assignments"));
   const renderNav = (items: NavItem[]) => items.map((item) => {
     const Icon = item.icon;
-    return <Link key={item.path} to={item.path} onClick={() => setMobileOpen(false)} className={`student-nav-link ${isActive(item.path) ? "student-nav-active" : ""}`}><Icon size={17} strokeWidth={1.8}/><span>{item.label}</span>{item.label === "Assessments" && <span className="ml-auto rounded-full bg-rose-100 px-2 py-0.5 text-[10px] font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">2</span>}</Link>;
+    const className = `student-nav-link ${isActive(item.path) ? "student-nav-active" : ""}`;
+    const contents = <><Icon size={17} strokeWidth={1.8}/><span>{item.label}</span>{item.label === "Assessments" && <span className="ml-auto rounded-full bg-rose-100 px-2 py-0.5 text-[10px] font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">2</span>}</>;
+    return item.external ? <a key={item.path} href={item.path} target="_blank" rel="noreferrer" onClick={() => setMobileOpen(false)} className={className}>{contents}</a> : <Link key={item.path} to={item.path} onClick={() => setMobileOpen(false)} className={className}>{contents}</Link>;
   });
   return <div className="student-app min-h-screen bg-background text-foreground">
     {mobileOpen && <button aria-label="Close navigation" onClick={() => setMobileOpen(false)} className="fixed inset-0 z-40 bg-slate-950/40 lg:hidden"/>}
@@ -133,7 +135,7 @@ function DashboardPage() {
         <Panel><PanelTitle title="Coming up next" detail="Classes and deadlines to keep on your radar" action={<Link to="/student/courses" className="text-xs font-semibold text-primary">Open calendar</Link>}/><div className="divide-y divide-border px-5 pb-1 sm:px-6">{assignments.slice(0,2).map((a,i)=><div key={a.id} className="flex items-center gap-3 py-4"><div className={`date-tile ${i===0?"date-rose":"date-teal"}`}><span>{i===0?"23":"24"}</span><small>NOV</small></div><div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold">{a.title}</p><p className="mt-1 text-xs text-muted-foreground">{a.course} · {a.due}</p></div><Status tone={i===0?"warning":"info"}>{i===0?"Due today":"Tomorrow"}</Status></div>)}</div></Panel>
       </div>
       <div className="space-y-6">
-        <Panel><PanelTitle title="Quick access" detail="Jump back into your learning"/><div className="grid grid-cols-2 gap-3 px-5 pb-5 sm:px-6">{[{label:"My coursework",icon:BookOpen,path:"/student/courses",color:"teal"},{label:"IdeaPad",icon:PenLine,path:"/student/assignments/as-01/ideapad",color:"rose"},{label:"Grades",icon:Award,path:"/student/grades",color:"blue"},{label:"Fee statement",icon:Wallet,path:"/student/payments",color:"gold"}].map(a=>{const Icon=a.icon;return <Link to={a.path} key={a.label} className="quick-link"><span className={`quick-icon quick-${a.color}`}><Icon size={18}/></span><span className="text-xs font-semibold">{a.label}</span><ArrowRight size={13} className="ml-auto text-muted-foreground"/></Link>})}</div></Panel>
+        <Panel><PanelTitle title="Quick access" detail="Jump back into your learning"/><div className="grid grid-cols-2 gap-3 px-5 pb-5 sm:px-6">{[{label:"My coursework",icon:BookOpen,path:"/student/courses",color:"teal"},{label:"IdeaPad",icon:PenLine,path:"/student/ideapad/as-01",color:"rose"},{label:"Grades",icon:Award,path:"/student/grades",color:"blue"},{label:"Fee statement",icon:Wallet,path:"/student/payments",color:"gold"}].map(a=>{const Icon=a.icon;return <Link to={a.path} key={a.label} className="quick-link"><span className={`quick-icon quick-${a.color}`}><Icon size={18}/></span><span className="text-xs font-semibold">{a.label}</span><ArrowRight size={13} className="ml-auto text-muted-foreground"/></Link>})}</div></Panel>
         <Panel className="overflow-hidden"><div className="bg-[linear-gradient(135deg,#f8e8eb,#f5f0ed)] p-5 dark:bg-[linear-gradient(135deg,#422d3b,#28354a)]"><div className="flex items-center gap-2 text-rose-700 dark:text-rose-200"><Zap size={16}/><span className="text-xs font-semibold uppercase tracking-wider">A little reminder</span></div><p className="mt-3 text-lg font-semibold leading-snug text-slate-800 dark:text-slate-100">Small practice sessions add up to big progress.</p><p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-300">Try a focused 20-minute session today. Your future self will thank you.</p><Link to="/student/courses" className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-rose-800 dark:text-rose-200">Open coursework <ArrowRight size={13}/></Link></div></Panel>
       </div>
     </div>
@@ -225,13 +227,13 @@ export default function StudentPortal() {
   const path=location.pathname.replace(/\/$/,"")||"/student/dashboard";
   const parts=path.split("/").filter(Boolean);
   const page=parts[1]||"dashboard";
-  let content:React.ReactNode;
+  let content:ReactNode;
   if(page==="dashboard") content=<DashboardPage/>;
   else if(page==="courses") content=<CourseworkPage/>;
   else if(page==="units") content=<UnitPage unitId={parts[2]||"unit-02"}/>;
   else if(page==="classes") content=<ClassPage classId={parts[2]||"class-01"}/>;
-  else if(page==="assignments"&&parts[3]==="ideapad") content=<IdeaPadPage/>;
+  else if(page==="ideapad") content=<IdeaPadPage/>;
   else content=<GenericPage page={page}/>;
-  const activePath=page==="units"||page==="classes"||page==="assignments"?"courses":`/student/${page}`;
+  const activePath=page==="units"||page==="classes"||page==="assignments"||page==="ideapad"?"courses":`/student/${page}`;
   return <StudentShell activePath={activePath}>{content}</StudentShell>;
 }
