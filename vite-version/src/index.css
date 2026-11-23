@@ -172,3 +172,94 @@ html {
 .animate-logo-scroll:hover {
   animation-play-state: paused;
 }
+
+
+/* Vivace student portal — semantic accents layered over the starter theme */
+.student-app { min-height: 100vh; }
+.student-sidebar { background: var(--card); }
+.student-nav-label {
+  margin: 0 0 .65rem .7rem;
+  color: var(--muted-foreground);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.student-nav-link {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: .75rem;
+  margin: 2px 0;
+  border-radius: 11px;
+  padding: .65rem .75rem;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  font-weight: 550;
+  transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+.student-nav-link:hover { background: var(--muted); color: var(--foreground); transform: translateX(2px); }
+.student-nav-active {
+  background: color-mix(in oklch, var(--primary) 12%, transparent);
+  color: var(--primary);
+  font-weight: 700;
+}
+.student-nav-active::before {
+  width: 3px;
+  height: 20px;
+  margin-left: -12px;
+  border-radius: 0 4px 4px 0;
+  background: var(--primary);
+  content: "";
+}
+.metric-icon { display: flex; width: 38px; height: 38px; align-items: center; justify-content: center; border-radius: 12px; }
+.metric-teal { background: #e0f2ef; color: #267b78; }
+.metric-rose { background: #f9e8ec; color: #a64c65; }
+.metric-blue { background: #e7edf9; color: #4c669c; }
+.metric-gold { background: #f8f0dc; color: #98732d; }
+.dark .metric-teal { background: #174743; color: #a9e0d6; }
+.dark .metric-rose { background: #4a2d3b; color: #f2bdca; }
+.dark .metric-blue { background: #2b3b5b; color: #c1d0f4; }
+.dark .metric-gold { background: #4a4027; color: #e8d29b; }
+.course-mark { display: flex; width: 40px; height: 40px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 13px; }
+.mark-teal { background: #e1f2ef; color: #277b76; }
+.mark-rose { background: #f8e8ed; color: #a34d67; }
+.mark-blue { background: #e8eef9; color: #536c9d; }
+.dark .mark-teal { background: #174743; color: #a9e0d6; }
+.dark .mark-rose { background: #4a2d3b; color: #f2bdca; }
+.dark .mark-blue { background: #2b3b5b; color: #c1d0f4; }
+.progress-teal { background: #4e9d94; }
+.progress-rose { background: #c8758b; }
+.progress-blue { background: #7189bb; }
+.progress-gold { background: #c6a45d; }
+.quick-link { display: flex; min-height: 62px; align-items: center; gap: .65rem; border: 1px solid var(--border); border-radius: 13px; padding: .7rem; transition: border-color .18s ease, background .18s ease; }
+.quick-link:hover { border-color: color-mix(in oklch, var(--primary) 45%, var(--border)); background: var(--muted); }
+.quick-icon { display: flex; width: 34px; height: 34px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 10px; }
+.quick-teal { background: #e1f2ef; color: #277b76; }
+.quick-rose { background: #f8e8ed; color: #a34d67; }
+.quick-blue { background: #e8eef9; color: #536c9d; }
+.quick-gold { background: #f8f0dc; color: #98732d; }
+.dark .quick-teal { background: #174743; color: #a9e0d6; }
+.dark .quick-rose { background: #4a2d3b; color: #f2bdca; }
+.dark .quick-blue { background: #2b3b5b; color: #c1d0f4; }
+.dark .quick-gold { background: #4a4027; color: #e8d29b; }
+.date-tile { display: flex; width: 44px; height: 48px; flex-shrink: 0; flex-direction: column; align-items: center; justify-content: center; border-radius: 11px; }
+.date-tile span { font-size: 17px; font-weight: 700; line-height: 1; }
+.date-tile small { margin-top: 4px; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
+.date-rose { background: #f9e8ec; color: #a64c65; }
+.date-teal { background: #e0f2ef; color: #267b78; }
+.dark .date-rose { background: #4a2d3b; color: #f2bdca; }
+.dark .date-teal { background: #174743; color: #a9e0d6; }
+.status { display: inline-flex; align-items: center; border-radius: 999px; padding: .28rem .58rem; font-size: 10px; font-weight: 650; white-space: nowrap; }
+.status-neutral { background: var(--muted); color: var(--muted-foreground); }
+.status-success { background: #e3f3ec; color: #287456; }
+.status-warning { background: #f8efd9; color: #8b6827; }
+.status-danger { background: #f8e5e8; color: #a23e57; }
+.status-info { background: #e7eef8; color: #4c6595; }
+.dark .status-success { background: #183f35; color: #a7dec3; }
+.dark .status-warning { background: #463a24; color: #e8d39c; }
+.dark .status-danger { background: #492b38; color: #f0b7c7; }
+.dark .status-info { background: #263955; color: #bfd0f3; }
+@media (prefers-reduced-motion: reduce) {
+  .student-nav-link, .quick-link { transition: none; }
+}
