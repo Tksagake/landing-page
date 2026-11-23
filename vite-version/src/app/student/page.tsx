@@ -58,16 +58,16 @@ function Status({ children, tone = "neutral" }: { children: ReactNode; tone?: "n
 function ProgressBar({ value, color = "teal" }: { value: number; color?: string }) {
   return <div className="h-2 overflow-hidden rounded-full bg-muted"><div className={`h-full rounded-full progress-${color}`} style={{ width: `${value}%` }} /></div>;
 }
-function PageHeading({ eyebrow, title, description, action }: { eyebrow?: string; title: string; description?: string; action?: React.ReactNode }) {
+function PageHeading({ eyebrow, title, description, action }: { eyebrow?: string; title: string; description?: string; action?: ReactNode }) {
   return <div className="mb-7 flex flex-wrap items-end justify-between gap-4"><div>{eyebrow && <p className="mb-2 text-xs font-semibold uppercase tracking-[.16em] text-primary">{eyebrow}</p>}<h1 className="text-3xl font-semibold tracking-tight text-foreground">{title}</h1>{description && <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{description}</p>}</div>{action}</div>;
 }
-function Panel({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function Panel({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <section className={`rounded-2xl border border-border/80 bg-card shadow-[0_5px_24px_rgba(20,52,67,.035)] ${className}`}>{children}</section>;
 }
-function PanelTitle({ title, detail, action }: { title: string; detail?: string; action?: React.ReactNode }) {
+function PanelTitle({ title, detail, action }: { title: string; detail?: string; action?: ReactNode }) {
   return <div className="flex items-start justify-between gap-3 px-5 pb-4 pt-5 sm:px-6"><div><h2 className="font-semibold text-foreground">{title}</h2>{detail && <p className="mt-1 text-xs text-muted-foreground">{detail}</p>}</div>{action}</div>;
 }
-function StudentShell({ children, activePath }: { children: React.ReactNode; activePath: string }) {
+function StudentShell({ children, activePath }: { children: ReactNode; activePath: string }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
   const isActive = (path: string) => activePath === path || (path === "/student/courses" && activePath.startsWith("/student/units")) || (path === "/student/courses" && activePath.startsWith("/student/classes")) || (path === "/student/courses" && activePath.startsWith("/student/assignments"));
