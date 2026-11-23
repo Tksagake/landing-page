@@ -1,12 +1,10 @@
-import { useMemo, useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
-  Activity, ArrowDownToLine, ArrowLeft, ArrowRight, Award, Bell, BookOpen,
-  BookOpenCheck, CalendarDays, Check, CheckCircle2, ChevronDown, ChevronRight,
-  CircleHelp, Clock3, CreditCard, Download, FileCheck2, FileText, GraduationCap,
-  Headphones, Home, Library, LogOut, Menu, MessageCircle, Music2, NotebookPen,
-  PenLine, Play, Plus, Search, Send, Settings, ShieldCheck, Sparkles, Upload,
-  UserRound, Wallet, X, Zap,
+  Activity, ArrowLeft, ArrowRight, Award, Bell, BookOpen, CalendarDays, Check,
+  CheckCircle2, ChevronDown, ChevronRight, Clock3, CreditCard, Download, FileCheck2,
+  FileText, GraduationCap, Headphones, Home, Library, Menu, Music2, NotebookPen,
+  PenLine, Play, Plus, Search, Send, ShieldCheck, Sparkles, UserRound, Wallet, X, Zap,
 } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 
@@ -53,7 +51,7 @@ const classes = [
 const money = (n: number) => new Intl.NumberFormat("en-KE", { style: "currency", currency: "KES", maximumFractionDigits: 0 }).format(n);
 const titleCase = (value: string) => value.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
-function Status({ children, tone = "neutral" }: { children: React.ReactNode; tone?: "neutral" | "success" | "warning" | "danger" | "info" }) {
+function Status({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "success" | "warning" | "danger" | "info" }) {
   return <span className={`status status-${tone}`}>{children}</span>;
 }
 function ProgressBar({ value, color = "teal" }: { value: number; color?: string }) {
